@@ -309,39 +309,39 @@ class BulkcontentCli extends JApplicationCli
 	}
     public function clean() 
     {
-    	 // Remove articles from category
-			$db = JFactory::getDBO(); 
-			//$db->quoteName('id')
-			$query = "DELETE FROM #__assets WHERE ".$db->qn('title')." LIKE " .$db->q('Bulk%');
-			$db->setQuery($query);
-			$result=$db->query(); // Whoosh!
-			if(!$result) { 
+    	// Remove articles from category
+	$db = JFactory::getDBO(); 
+	//$db->quoteName('id')
+	$query = "DELETE FROM #__assets WHERE ".$db->qn('title')." LIKE " .$db->q('Bulk%');
+	$db->setQuery($query);
+	$result=$db->query(); // redo use try
+	if(!$result) { 
             exit('311'); 
         } 
-			$query = "DELETE FROM #__categories WHERE ".$db->qn('alias')." LIKE "  .$db->q('bulkcategory-%');
+	$query = "DELETE FROM #__categories WHERE ".$db->qn('alias')." LIKE "  .$db->q('bulkcategory-%');
 			$db->setQuery($query);
-			$result=$db->query(); // Whoosh!
-      if(!$result) { 
+			$result=$db->query();  // redo use try
+        if(!$result) { 
             exit('312'); 
         } 
-      $query = "DELETE FROM #__content WHERE ".$db->qn('alias')." LIKE ".$db->q('bulkcontent-%');
-			$db->setQuery($query);
-			$result=$db->query(); // Whoosh!
-			if(!$result) { 
+        $query = "DELETE FROM #__content WHERE ".$db->qn('alias')." LIKE ".$db->q('bulkcontent-%');
+	$db->setQuery($query);
+	$result=$db->query();  // redo use try
+	if(!$result) { 
             exit('313'); 
         } 
-      $query = "DELETE FROM #__menu_types WHERE ".$db->qn('menutype')." LIKE ".$db->q('bulkmenu%');
-			$db->setQuery($query);
-			$result=$db->query(); // Whoosh!
-			if(!$result) { 
-            exit('313'); 
+        $query = "DELETE FROM #__menu WHERE ".$db->qn('menutype')." LIKE ".$db->q('BulkMenuType%');
+	$db->setQuery($query);
+	$result=$db->query(); // redo use try
+	if(!$result) { 
+            exit('314'); 
+        }       
+        $query = "DELETE FROM #__menu_types WHERE ".$db->qn('menutype')." LIKE ".$db->q('bulkmenu%');
+	$db->setQuery($query);
+	$result=$db->query(); //  redo use try
+	if(!$result) { 
+            exit('315'); 
         }   
-      $query = "DELETE FROM #__menu WHERE ".$db->qn('menutype')." = ".$db->q('BulkMenuType');
-			$db->setQuery($query);
-			$result=$db->query(); // Whoosh!
-			if(!$result) { 
-            exit('313'); 
-        }     
      
     }	 
     /** 
